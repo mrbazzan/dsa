@@ -61,6 +61,11 @@ def print_maze(maze, point, path=''):
 
 
 def resolve_path_coordinate(x, i, j):
+    """
+    Given a path, return the new coordinate after resolving
+
+    x - the path. e.g 'LLDD'
+    """
     # print(x)
     for char in x:
         i, j = update_coordinate(char, i, j)

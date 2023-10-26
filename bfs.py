@@ -66,7 +66,6 @@ def resolve_path_coordinate(x, i, j):
 
     x - the path. e.g 'LLDD'
     """
-    # print(x)
     for char in x:
         i, j = update_coordinate(char, i, j)
     return i, j

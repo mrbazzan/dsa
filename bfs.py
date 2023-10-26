@@ -53,6 +53,8 @@ def update_coordinate(char, i, j):
 def print_maze(maze, point, path=''):
     i, j = find_point(maze, point)
 
+    # `path` includes even the character that matches the
+    # endpoint('X'), so there is a need to skip it.
     for char in path[:-1]:
         i, j = update_coordinate(char, i, j)
         maze[i][j] = '+'

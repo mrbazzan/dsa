@@ -73,6 +73,9 @@ def resolve_path_coordinate(x, i, j):
     return i, j
 
 
+# Ensure that there is a start and end point
+assert find_point(maze, 'O') and find_point(maze, 'X')
+
 q = queue.Queue()
 q.put('')
 

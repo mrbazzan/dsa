@@ -79,7 +79,7 @@ def main():
     start = 'O'
     i,j = find_point(maze, start)
     while start != 'X':
-        x = q.get()
+        path = q.get()
 
         # check that present coordinate is not already
         # been passed through
@@ -89,15 +89,15 @@ def main():
         #     - be D and vice-versa
 
         for point in ['L', 'R', 'D', 'U']:
-            a, b = resolve_path_coordinate(x + point, i, j)
+            a, b = resolve_path_coordinate(path + point, i, j)
             if (len(maze)-1 >= a >= 0) and (len(maze[0])-1 >= b >= 0):
                 if maze[a][b] != '#':
-                    q.put(x + point)
+                    q.put(path + point)
 
-        first, second = resolve_path_coordinate(x, i, j)
+        first, second = resolve_path_coordinate(path, i, j)
         start = maze[first][second]
 
-    print_maze(maze, 'O', path=x)
+    print_maze(maze, 'O', path=path)
 
 if __name__ == "__main__":
     # Ensure that there is a start and end point

@@ -88,12 +88,12 @@ def main():
         for point in ['L', 'R', 'D', 'U']:
             row, col = resolve_path_coordinate(path + point, i, j)
             if (len(maze)-1 >= row >= 0) and (len(maze[0])-1 >= col >= 0):
-                if maze[row][col] != '#':
-                    q.put(path + point)
-
-                    if maze[row][col] == 'X':
-                        start_point = maze[row][col]
+                char = maze[row][col]
+                if char != '#':
+                    if char == 'X':
+                        start_point = char
                         break
+                    q.put(path + point)
 
     print_maze(maze, 'O', path=path)
 

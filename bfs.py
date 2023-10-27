@@ -89,9 +89,9 @@ def main():
         #     - be D and vice-versa
 
         for point in ['L', 'R', 'D', 'U']:
-            a, b = resolve_path_coordinate(path + point, i, j)
-            if (len(maze)-1 >= a >= 0) and (len(maze[0])-1 >= b >= 0):
-                if maze[a][b] != '#':
+            row, col = resolve_path_coordinate(path + point, i, j)
+            if (len(maze)-1 >= row >= 0) and (len(maze[0])-1 >= col >= 0):
+                if maze[row][col] != '#':
                     q.put(path + point)
 
         first, second = resolve_path_coordinate(path, i, j)

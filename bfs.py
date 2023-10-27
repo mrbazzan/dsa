@@ -52,10 +52,7 @@ def update_coordinate(char, i, j):
 
 def print_maze(maze, point, path=''):
     i, j = find_point(maze, point)
-
-    # `path` includes even the character that matches the
-    # endpoint('X'), so there is a need to skip it.
-    for char in path[:-1]:
+    for char in path:
         i, j = update_coordinate(char, i, j)
         maze[i][j] = '+'
 
@@ -94,8 +91,9 @@ def main():
                 if maze[row][col] != '#':
                     q.put(path + point)
 
-        first, second = resolve_path_coordinate(path, i, j)
-        start_point = maze[first][second]
+                    if maze[row][col] == 'X':
+                        start_point = maze[row][col]
+                        break
 
     print_maze(maze, 'O', path=path)
 

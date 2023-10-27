@@ -95,29 +95,11 @@ while start != 'X':
     #     - if the last element is U, the next one shouldn't
     #     - be D and vice-versa
 
-    # LEFT
-    a, b = resolve_path_coordinate(x + 'L', i, j)
-    if b >= 0 and b <= width - 1:
-        if maze[a][b] != '#':
-            q.put(x + 'L')
-
-    # RIGHT
-    a, b = resolve_path_coordinate(x + 'R', i, j)
-    if b >= 0 and b <= width - 1:
-        if maze[a][b] != '#':
-            q.put(x + 'R')
-
-  # DOWN
-    a, b = resolve_path_coordinate(x + 'D', i, j)
-    if a >= 0 and a <= height - 1:    
-        if maze[a][b] != '#':
-            q.put(x + 'D')
-
-    # UP
-    a, b = resolve_path_coordinate(x + 'U', i, j)
-    if a >= 0 and a <= height - 1:
-        if maze[a][b] != '#':
-            q.put(x + 'U')
+    for point in ['L', 'R', 'D', 'U']:
+        a, b = resolve_path_coordinate(x + point, i, j)
+        if (height-1 >= a >= 0) and (width-1 >= b >= 0):
+            if maze[a][b] != '#':
+                q.put(x + point)
 
     first, second = resolve_path_coordinate(x, i, j)
     start = maze[first][second]

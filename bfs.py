@@ -1,24 +1,12 @@
 import queue
 
-
-# def maze():
-#     return [
+# maze = [
 #         ['#', '#', '#', 'O', '#'],
 #         ['#', ' ', ' ', ' ', '#'],
 #         ['#', ' ', '#', ' ', '#'],
 #         ['#', ' ', ' ', ' ', '#'],
 #         ['#', 'X', '#', '#', '#']
 #     ]
-
-# def maze2():
-#     return [
-#         ['#', '#', '#', '#', 'O', '#'],
-#         ['#', ' ', ' ', ' ', ' ', '#'],
-#         ['#', ' ', '#', ' ', ' ', '#'],
-#         ['#', ' ', '#', ' ', ' ', '#'],
-#         ['#', ' ', '#', '#', ' ', '#'],
-#         ['#', ' ', ' ', ' ', ' ', '#'],
-#         ['#', '#', '#', 'X', '#', '#']]
 
 maze = [
         ['#', '#', '#', '#', 'O', '#'],
@@ -29,14 +17,12 @@ maze = [
         ['#', ' ', ' ', ' ', ' ', '#'],
         ['#', '#', '#', 'X', '#', '#']]
 
-
 def find_point(maze, point):
     for i, line in enumerate(maze):
         if point in line:
             return i, line.index(point)
 
     raise Exception(f"'{point}' not in maze")
-
 
 def update_coordinate(char, i, j):
     if char == 'L':
@@ -49,7 +35,6 @@ def update_coordinate(char, i, j):
         i = i + 1
     return i, j
 
-
 def print_maze(maze, point, path=''):
     i, j = find_point(maze, point)
     for char in path:
@@ -57,7 +42,6 @@ def print_maze(maze, point, path=''):
         maze[i][j] = '+'
 
     print('\n'.join([' '.join(line) for line in maze]))
-
 
 def resolve_path_coordinate(x, i, j):
     """

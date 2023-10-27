@@ -72,35 +72,36 @@ def resolve_path_coordinate(x, i, j):
         i, j = update_coordinate(char, i, j)
     return i, j
 
+def main():
+    q = queue.Queue()
+    q.put('')
 
-# Ensure that there is a start and end point
-assert find_point(maze, 'O') and find_point(maze, 'X')
+    start = 'O'
+    i,j = find_point(maze, start)
+    while start != 'X':
+        x = q.get()
 
-q = queue.Queue()
-q.put('')
+        # check that present coordinate is not already
+        # been passed through
+        #     - if the last element is L, the next one shouldn't
+        #     - be R and vice-versa
+        #     - if the last element is U, the next one shouldn't
+        #     - be D and vice-versa
 
-start = 'O'
-i,j = find_point(maze, start)
-while start != 'X':
+        for point in ['L', 'R', 'D', 'U']:
+            a, b = resolve_path_coordinate(x + point, i, j)
+            if (len(maze)-1 >= a >= 0) and (len(maze[0])-1 >= b >= 0):
+                if maze[a][b] != '#':
+                    q.put(x + point)
 
-    x = q.get()
+        first, second = resolve_path_coordinate(x, i, j)
+        start = maze[first][second]
 
-    # check that present coordinate is not already
-    # been passed through
-    #     - if the last element is L, the next one shouldn't
-    #     - be R and vice-versa
-    #     - if the last element is U, the next one shouldn't
-    #     - be D and vice-versa
+    print_maze(maze, 'O', path=x)
 
-    for point in ['L', 'R', 'D', 'U']:
-        a, b = resolve_path_coordinate(x + point, i, j)
-        if (len(maze)-1 >= a >= 0) and (len(maze[0])-1 >= b >= 0):
-            if maze[a][b] != '#':
-                q.put(x + point)
+if __name__ == "__main__":
+    # Ensure that there is a start and end point
+    assert find_point(maze, 'O') and find_point(maze, 'X')
 
-    first, second = resolve_path_coordinate(x, i, j)
-    start = maze[first][second]
-
-
-print_maze(maze, 'O', path=x)
+    main()
 

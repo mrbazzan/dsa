@@ -76,9 +76,9 @@ def main():
     q = queue.Queue()
     q.put('')
 
-    start = 'O'
-    i,j = find_point(maze, start)
-    while start != 'X':
+    start_point = 'O'
+    i,j = find_point(maze, start_point)
+    while start_point != 'X':
         path = q.get()
 
         # check that present coordinate is not already
@@ -95,7 +95,7 @@ def main():
                     q.put(path + point)
 
         first, second = resolve_path_coordinate(path, i, j)
-        start = maze[first][second]
+        start_point = maze[first][second]
 
     print_maze(maze, 'O', path=path)
 

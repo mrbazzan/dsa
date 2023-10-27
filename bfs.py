@@ -87,7 +87,6 @@ i,j = find_point(maze, start)
 while start != 'X':
 
     x = q.get()
-    # print("Present: ", x)
 
     # check that present coordinate is not already
     # been passed through
@@ -96,45 +95,29 @@ while start != 'X':
     #     - if the last element is U, the next one shouldn't
     #     - be D and vice-versa
 
-    # print(i, j)
-    # print(height, width)
-    # sys.exit
-
     # LEFT
-    # if x and x[len(x)-1] != 'R':
     a, b = resolve_path_coordinate(x + 'L', i, j)
-    # print("a and b " + str(a) + " " + str(b))
     if b >= 0 and b <= width - 1:
         if maze[a][b] != '#':
             q.put(x + 'L')
 
     # RIGHT
-    # if x and x[len(x)-1] != 'L':
     a, b = resolve_path_coordinate(x + 'R', i, j)
-    # print("a and b " + str(a) + " " + str(b))
     if b >= 0 and b <= width - 1:
         if maze[a][b] != '#':
             q.put(x + 'R')
 
   # DOWN
-    # if x and x[len(x)-1] != 'U':
     a, b = resolve_path_coordinate(x + 'D', i, j)
-    # print("a and b " + str(a) + " " + str(b))
     if a >= 0 and a <= height - 1:    
         if maze[a][b] != '#':
             q.put(x + 'D')
 
     # UP
-    # if x and x[len(x)-1] != 'D':
     a, b = resolve_path_coordinate(x + 'U', i, j)
-    # print("a and b " + str(a) + " " + str(b))
     if a >= 0 and a <= height - 1:
         if maze[a][b] != '#':
             q.put(x + 'U')
-
-    # print(q.queue)
-    # print('\n')
-
 
     first, second = resolve_path_coordinate(x, i, j)
     start = maze[first][second]

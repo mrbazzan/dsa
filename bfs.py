@@ -79,9 +79,6 @@ assert find_point(maze, 'O') and find_point(maze, 'X')
 q = queue.Queue()
 q.put('')
 
-height = len(maze)
-width = len(maze[0])
-
 start = 'O'
 i,j = find_point(maze, start)
 while start != 'X':
@@ -97,7 +94,7 @@ while start != 'X':
 
     for point in ['L', 'R', 'D', 'U']:
         a, b = resolve_path_coordinate(x + point, i, j)
-        if (height-1 >= a >= 0) and (width-1 >= b >= 0):
+        if (len(maze)-1 >= a >= 0) and (len(maze[0])-1 >= b >= 0):
             if maze[a][b] != '#':
                 q.put(x + point)
 

@@ -16,6 +16,10 @@ requests = [
     ["POST", "https://example.com/?token=safh34ywb0p5&csrf=ak2sh32dy&name=chris"],
 ]
 
+def get_parameters(url):
+    return url.split("?")[1]
+
+
 def get_url_parameters(url):
     import re
 
@@ -33,7 +37,7 @@ def get_url_parameters(url):
 def request_parser(valid_auth_tokens, requests):
     responses = []
     for action, url in requests:
-        url_parameters = get_url_parameters(url)
+        url_parameters = get_parameters(url)
         parameters = url_parameters.split("&")
 
         param_dict = {}

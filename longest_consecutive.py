@@ -3,19 +3,17 @@ from typing import List
 
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
-        count, highest = 1, 0
-        for i in range(len(nums)):
-            number = nums[i]
-            while (number+1) in nums:
-                count += 1
-                number += 1
 
-            if count > highest:
-                highest = count
-
-            count = 1
-
-        return highest
+        hash_set = set(nums)
+        length = 0
+        for num in nums:
+            # find the starting point of the sequence
+            if (num - 1) not in hash_set:
+                count = 1
+                while (num+count) in hash_set:
+                    count += 1
+                length = max(count, length)
+        return length
 
 
 print(Solution().longestConsecutive([]))

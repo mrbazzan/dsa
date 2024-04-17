@@ -4,10 +4,14 @@ from typing import List
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         profit = 0
+        left, right = 0, 1
 
-        for i in range(len(prices)-1):
-            max_price = max(prices[i+1:])
-            profit = max(profit, max_price-prices[i])
+        while right < len(prices):
+            if prices[left] > prices[right]:
+                left = right
+            else:
+                profit = max(profit, prices[right]-prices[left])
+            right = right + 1
 
         return profit
 

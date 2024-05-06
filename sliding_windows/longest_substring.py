@@ -2,7 +2,7 @@
 from typing import List
 
 class Solution:
-    def lengthOfLongestSubstring(self, s: str) -> int:
+    def _lengthOfLongestSubstring(self, s: str) -> int:
         sub_dict = {}
         length = 0
         left, right = 0, len(s)
@@ -23,6 +23,21 @@ class Solution:
             length = max(length, len(sub_dict))
 
         return length
+
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        left, length = 0, 0
+        char_set = set()
+
+        for r in range(len(s)):
+            while s[r] in char_set:
+                char_set.remove(s[left])
+                left = left + 1
+
+            char_set.add(s[r])
+            length = max(length, len(char_set))
+
+        return length
+
 
 print(Solution().lengthOfLongestSubstring("abcabcbb"))
 print(Solution().lengthOfLongestSubstring("abcbedbb"))

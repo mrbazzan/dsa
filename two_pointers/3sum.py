@@ -2,6 +2,26 @@
 from typing import List
 
 
+# This one works too.
+def three_sum(arr):
+    arr = sorted(arr)
+    res = set()
+    for i in range(len(arr)):
+        if i and arr[i] == arr[i-1]:
+            continue
+
+        left, right = i+1, len(arr)-1
+        while left < right:
+            if (arr[i] + arr[left] + arr[right]) > 0:
+                right = right - 1
+            elif (arr[i] + arr[left] + arr[right]) < 0:
+                left = left + 1
+            else:
+                res.add((arr[i], arr[left], arr[right]))
+                right = right - 1
+    return res
+
+
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         arr = sorted(nums)

@@ -2,14 +2,15 @@
 from typing import List
 
 class Solution:
-    def get_map(self, s: str) -> dict:
+    def get_map(self, s: str, c: str = '') -> dict:
         hash_map = {}
         for char in s:
             if char in hash_map:
                 hash_map[char] += 1
             else:
                 hash_map[char] = 1
-        return hash_map
+
+        return { k:hash_map[k] for k in hash_map if k != c }
 
     def freq_char(self, hash_map: dict) -> str:
         count = 0
@@ -21,8 +22,7 @@ class Solution:
         return char
 
     def characterReplacement(self, s: str, k: int) -> int:
-        hash_map = self.get_map(s)
-        frequent_char = self.freq_char(hash_map)
+        frequent_char = self.freq_char(self.get_map(s))
 
         output = 0
         left, right = 0, 0
@@ -30,7 +30,7 @@ class Solution:
         while left < len(s):
 
             count = 0
-            while (count <= k) and right < len(s):
+            while count <= k and right < len(s):
                 if s[right] != frequent_char: count+=1
                 right += 1
 
@@ -40,23 +40,18 @@ class Solution:
             left = left + 1
             right = left
 
-        print(cont, frequent_char)
         return output
 
 
-# print(Solution().characterReplacement("XYYX", 0) == 2)
-# print(Solution().characterReplacement("XYYX", 2) == 4)
-# print(Solution().characterReplacement("XYYXX", 2) == 5)
-# print(Solution().characterReplacement("XYYXY", 2) == 5)
-# print(Solution().characterReplacement("XYYXYXY", 2) == 6)
-
+print(Solution().characterReplacement("XYYX", 0) == 2)
+print(Solution().characterReplacement("XYYX", 2) == 4)
+print(Solution().characterReplacement("XYYXX", 2) == 5)
+print(Solution().characterReplacement("XYYXY", 2) == 5)
+print(Solution().characterReplacement("XYYXYXY", 2) == 6)
 print(Solution().characterReplacement("XYYXYX", 2) == 5)
-
-# print(Solution().characterReplacement("XYYYX", 2) == 5)
-
+print(Solution().characterReplacement("XYYYX", 2) == 5)
 print(Solution().characterReplacement("AAABABB", 1) == 5)
 print(Solution().characterReplacement("AAABABB", 2) == 6)
-
-# print(Solution().characterReplacement("AABBABB", 1) == 5)
-# print(Solution().characterReplacement("CABBABB", 1) == 5)
+print(Solution().characterReplacement("AABBABB", 1) == 5)
+print(Solution().characterReplacement("CABBABB", 1) == 5)
 

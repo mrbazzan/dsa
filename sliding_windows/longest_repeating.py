@@ -24,18 +24,18 @@ class Solution:
     def characterReplacement(self, s: str, k: int) -> int:
         frequent_char = self.freq_char(self.get_map(s))
 
+
         output = 0
         left, right = 0, 0
-        cont = []
         while left < len(s):
+            while right < len(s):
+                substring_map = self.get_map(s[left:right+1], frequent_char)
+                if len(substring_map) == 1:
+                    for v in substring_map.values():
+                        if v > k: continue
+                        output = max(output, len(s[left:right+1]))
 
-            count = 0
-            while count <= k and right < len(s):
-                if s[right] != frequent_char: count+=1
-                right += 1
-
-            cont.append(s[left:right])
-            output = max(output, len(s[left:right]))
+                right+=1
 
             left = left + 1
             right = left

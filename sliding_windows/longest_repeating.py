@@ -2,23 +2,18 @@
 from typing import List
 
 class Solution:
-    def get_map(self, s: str) -> dict:
-        hash_map = {}
-        for char in s:
-            if char in hash_map:
-                hash_map[char] += 1
-            else:
-                hash_map[char] = 1
-        return hash_map
-
     def characterReplacement(self, s: str, k: int) -> int:
 
         output = 0
-        frequent_count = 0
         left, right = 0, 0
+
         while left < len(s):
+
+            frequent_count = 0
+            substring_map= {}
             while right < len(s):
-                substring_map = self.get_map(s[left:right+1])
+
+                substring_map[s[right]] = 1 + substring_map.get(s[right], 0)
 
                 # NOTE: Get the most frequent character at each point
                 frequent_count = max(frequent_count, substring_map[s[right]])

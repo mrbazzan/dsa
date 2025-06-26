@@ -2,43 +2,36 @@
 from typing import List
 
 class Solution:
-    def get_map(self, s: str, c: str = '') -> dict:
+    def get_map(self, s: str) -> dict:
         hash_map = {}
         for char in s:
             if char in hash_map:
                 hash_map[char] += 1
             else:
                 hash_map[char] = 1
+        return hash_map
 
-        return { k:hash_map[k] for k in hash_map if k != c }
-
-    def freq_char(self, hash_map: dict) -> str:
+    def freq_count(self, hash_map: dict) -> str:
         count = 0
-        char = ''
         for c in hash_map:
             if hash_map[c] > count:
                 char = c
                 count = hash_map[c]
-        return char
+        return count
 
     def characterReplacement(self, s: str, k: int) -> int:
-        frequent_char = self.freq_char(self.get_map(s))
-
 
         output = 0
-        left, right = 0, 0
+        left = 0
         while left < len(s):
-            while right < len(s):
-                substring_map = self.get_map(s[left:right+1], frequent_char)
-                if len(substring_map) == 1:
-                    for v in substring_map.values():
-                        if v > k: continue
-                        output = max(output, len(s[left:right+1]))
 
-                right+=1
+            frequent_count = self.freq_count(self.get_map(s[:left]))
+            # print(s[:left], frequent_count)
+
+            if len(s[:left]) - frequent_count <= k:
+                output = max(output, len(s[:left]))
 
             left = left + 1
-            right = left
 
         return output
 

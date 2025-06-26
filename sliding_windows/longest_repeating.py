@@ -11,27 +11,25 @@ class Solution:
                 hash_map[char] = 1
         return hash_map
 
-    def freq_count(self, hash_map: dict) -> str:
-        count = 0
-        for c in hash_map:
-            if hash_map[c] > count:
-                char = c
-                count = hash_map[c]
-        return count
-
     def characterReplacement(self, s: str, k: int) -> int:
 
         output = 0
-        left = 0
+        frequent_count = 0
+        left, right = 0, 0
         while left < len(s):
+            while right < len(s):
+                substring_map = self.get_map(s[left:right+1])
 
-            frequent_count = self.freq_count(self.get_map(s[:left]))
-            # print(s[:left], frequent_count)
+                # NOTE: Get the most frequent character at each point
+                frequent_count = max(frequent_count, substring_map[s[right]])
 
-            if len(s[:left]) - frequent_count <= k:
-                output = max(output, len(s[:left]))
+                if len(s[left:right+1]) - frequent_count <= k:
+                    output = max(output, len(s[left:right+1]))
+
+                right += 1
 
             left = left + 1
+            right = left
 
         return output
 

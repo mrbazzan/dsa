@@ -18,8 +18,8 @@ class Solution:
                 # NOTE: Get the most frequent character at each point
                 frequent_count = max(frequent_count, substring_map[s[right]])
 
-                if len(s[left:right+1]) - frequent_count <= k:
-                    output = max(output, len(s[left:right+1]))
+                if (right-left+1) - frequent_count <= k:
+                    output = max(output, (right-left+1))
 
                 right += 1
 

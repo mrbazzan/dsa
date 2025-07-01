@@ -6,25 +6,19 @@ class Solution:
 
         output = 0
         left, right = 0, 0
+        substring_map, frequent_count = {}, 0
 
-        while left < len(s):
+        while right < len(s):
 
-            frequent_count = 0
-            substring_map= {}
-            while right < len(s):
+            substring_map[s[right]] = 1 + substring_map.get(s[right], 0)
+            frequent_count = max(frequent_count, substring_map[s[right]])
 
-                substring_map[s[right]] = 1 + substring_map.get(s[right], 0)
+            while k < (right-left+1)-frequent_count:
+                substring_map[s[left]] -= 1
+                left = left + 1
 
-                # NOTE: Get the most frequent character at each point
-                frequent_count = max(frequent_count, substring_map[s[right]])
-
-                if (right-left+1) - frequent_count <= k:
-                    output = max(output, (right-left+1))
-
-                right += 1
-
-            left = left + 1
-            right = left
+            output = max(output, right-left+1)
+            right += 1
 
         return output
 
